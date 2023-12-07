@@ -2,7 +2,6 @@ import json
 import tkinter as tk
 import requests
 API_key='1b61610e5d58db58868ed08b1d69229e'
-API_key2='ac93fb48395def635c20722c7015cd02'
 window=tk.Tk()
 window.minsize(width=800,height=600)
 window.title("Weather Forecast")
@@ -14,12 +13,24 @@ def get_weather(lat,lon):
     # url=f'http://api.openweathermap.org/data/2.5/forecast/daily?lat=lat&lon=lon&appid={API_key}'
     
     response = requests.request("GET", url)
-    if response.status_code == 200:
-    # If the status code is 200, the request was successful
-        print(response.json())  # Print the JSON response
-    else:
-    # If the status code is not 200, print the response content
-        print(response.text)
+
+    try:
+        result = json.loads(response.text)
+        if result:
+            # set data to label
+            lbl1.config(text=f"Temperature: {result['main']['temp']} c")
+            lbl2.config(text=f"Humidity: {result['main']['humidity']} %")
+            lbl3.config(text=f"Wind Speed: {result['wind']['speed']} km/h")
+            lbl4.config(text=f"Pressure: {result['main']['pressure']} hPa")
+            lbl5.config(text=f"There is no data for Precipitation")
+
+        else:
+            erro_lbl.config(text=f"No result found for this location")
+        # print(f"latitude: {result[0]['lat']}")
+        # print(f"longitude:  {result[0]['lon']}")
+    except json.JSONDecodeError as e:
+        print("Error decoding JSON:", e)
+   
 
 def get_geo():
     # Retrieve the value from the Entry widget
