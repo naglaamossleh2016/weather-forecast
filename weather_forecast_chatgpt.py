@@ -16,7 +16,7 @@ def get_weather():
         wind_speed = weather_data['wind']['speed']
         pressure = weather_data['main']['pressure']
 
-        result_text = f"Temperature: {temperature}°C\nHumidity: {humidity}%\nWind Speed: {wind_speed} km/h\nRain Chance: {rain_chance}%\nPressure: {pressure} hPa"
+        result_text = f"Temperature: {temperature}°C\nHumidity: {humidity}%\nWind Speed: {wind_speed} km/h\nPressure: {pressure} hPa"
         result_label.config(text=result_text)
 
     except requests.exceptions.RequestException as e:
