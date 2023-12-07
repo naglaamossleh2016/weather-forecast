@@ -18,7 +18,7 @@ def get_weather(lat,lon):
         result = json.loads(response.text)
         if result:
             # set data to label
-            lbl1.config(text=f"Temperature: {result['main']['temp']} c")
+            lbl1.config(text=f"Temperature: {result['main']['temp']} °C")
             lbl2.config(text=f"Humidity: {result['main']['humidity']} %")
             lbl3.config(text=f"Wind Speed: {result['wind']['speed']} km/h")
             lbl4.config(text=f"Pressure: {result['main']['pressure']} hPa")
